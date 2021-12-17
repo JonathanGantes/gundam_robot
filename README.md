@@ -75,7 +75,7 @@ Es comentable utilizar `wstool` para instalar y configurar el ambiente;
 $ mkdir -p catkin_ws/src
 $ cd  catkin_ws
 $ wstool init src
-$ wstool merge -t src https://raw.githubusercontent.com/gundam-global-challenge/gundam_robot/.gundam.rosinstall
+$ wstool merge -t src https://raw.githubusercontent.com/JonathanGantes/gundam_robot/master/.gundam.rosinstall
 $ wstool update -t src
 $ source /opt/ros/$ROS_DISTRO/setup.bash
 $ rosdep install -y -r --from-paths src --ignore-src
