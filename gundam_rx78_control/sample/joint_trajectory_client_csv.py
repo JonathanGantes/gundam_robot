@@ -59,6 +59,7 @@ def main(filename):
     goal = FollowJointTrajectoryGoal()
     goal.goal_time_tolerance = rospy.Time(1)
 
+
     with open(filename) as f:
         reader = csv.reader(f, skipinitialspace=True)
         first_row = True
@@ -71,23 +72,26 @@ def main(filename):
                 point.positions = [float(n) for n in row[1:]]
                 point.time_from_start = rospy.Duration(float(row[0]))
                 goal.trajectory.points.append(point)
-    client = actionlib.SimpleActionClient(
-        '/fullbody_controller/follow_joint_trajectory',
-        FollowJointTrajectoryAction,
-    )
 
-    if not client.wait_for_server(timeout=rospy.Duration(10)):
-        rospy.logerr("Timed out waiting for Action Server")
-        rospy.signal_shutdown("Timed out waiting for Action Server")
-        sys.exit(1)
+    while (True):
+        client = actionlib.SimpleActionClient(
+            '/fullbody_controller/follow_joint_trajectory',
+            FollowJointTrajectoryAction,
+        )
 
-    # send goal
-    goal.trajectory.header.stamp = rospy.Time.now()
-    client.send_goal(goal)
-    print("waiting...")
-    if not client.wait_for_result(timeout=rospy.Duration(60)):
-        rospy.logerr("Timed out waiting for JTA")
-    rospy.loginfo("Exitting...")
+        if not client.wait_for_server(timeout=rospy.Duration(10)):
+            rospy.logerr("Timed out waiting for Action Server")
+            rospy.signal_shutdown("Timed out waiting for Action Server")
+            sys.exit(1)
+
+        # send goal
+        goal.trajectory.header.stamp = rospy.Time.now()
+        client.send_goal(goal)
+        print("waiting...")
+        if not client.wait_for_result(timeout=rospy.Duration(60)):
+            rospy.logerr("Timed out waiting for JTA")
+
+        rospy.loginfo("Exitting...")
 
 
 if __name__ == "__main__":
