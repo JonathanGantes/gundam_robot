@@ -14,20 +14,20 @@ Jonathan Gantes -
 Como Visualizar el modelo URDF
 ------------------------------
 
-To visualize URDF file in your rviz, you can use `display.launch` file.
+Para visualizar el modelo en rviz, usaremos el archivo `display.launch`.
 ```
 $ roslaunch gundam_rx78_description display.launch
 ```
 
 Como correr el Gundam en una simulación de Gazebo
 -------------------------------------------------
-Para correr la seimulación con el mundo vacío podemos lanzar el archivo `gundam_rx78_world.launch`.
+Para correr la simulación en el mundo vacío podemos lanzar el archivo `gundam_rx78_world.launch`.
 
 ```
 $ roslaunch gundam_rx78_gazebo gundam_rx78_world.launch
 ```
 
-Para correr la seimulación con el mundo de la Ciudad de Panamá podemos lanzar el archivo `gundam_rx78_panama.launch`.
+Para correr la simulación en el mundo de la Ciudad de Panamá podemos lanzar el archivo `gundam_rx78_panama.launch`.
 
 ```
 $ roslaunch gundam_rx78_gazebo gundam_rx78_panama.launch
